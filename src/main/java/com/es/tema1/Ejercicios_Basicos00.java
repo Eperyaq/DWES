@@ -30,5 +30,6 @@ public class Ejercicios_Basicos00 {
 
         System.out.println(ejercicios.Ejercicio2());
 
+
     }
 }
