@@ -19,7 +19,6 @@ public class UserController {
         try {
 
             // Si el controller obtiene un true, significa que ha ido bien, y que se ha eliminado correctamente
-            // TODO: Funcion Service
             return userService.deleteUser(nombre) ?
                     new ResponseEntity(200, "Usuario Eliminado") :
                     new ResponseEntity(400, "Bad Request");
