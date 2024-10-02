@@ -1,9 +1,8 @@
 package com.es.tema1.EjerciciosBasicos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.security.sasl.SaslClient;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Ejercicios_Basicos04 {
 
@@ -32,9 +31,76 @@ public class Ejercicios_Basicos04 {
 
         System.out.println("Carta seleccionada " + valor  + paloSacado);
     }
+
+    public static void Ejercicio3(){
+        String[] palos = {" Espada"," Oro"," Basto"," Copas"};
+        String[] numeros =  {"2","3","4","5","6","7","Sota","Caballo","Rey","As"};
+
+        Random random = new Random();
+
+        String paloSacado = palos[random.nextInt(palos.length)];
+        String valor = numeros[random.nextInt(numeros.length)];
+
+        System.out.println("Carta seleccionada " + valor  + paloSacado);
+    }
+
+    public static void Ejercicio13(){
+
+        Random random = new Random();
+        int dado1;
+        int dado2;
+        int veces = 0;
+        do {
+            dado1 = random.nextInt(6) + 1;
+            dado2 = random.nextInt(6) + 1;
+            veces++;
+            System.out.println("Tirada " + veces + " dado 1 - " + dado1 + " dado 2 - " + dado2);
+        }while (dado1 != dado2);
+        System.out.println("Los dados tienen el mismo valor en el intento numero " + veces);
+    }
+
+    public static void Ejercicio14(){
+        Scanner lectura = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("Piensa en un numero 0-100");
+
+        int num = lectura.nextInt();
+        int oportunidades = 5;
+        int min = 0;
+        int max = 100;
+
+        while (oportunidades > 0) {
+
+            int pensado = random.nextInt((max - min) + 1) + min;
+            System.out.println("El número que la máquina ha pensado es: " + pensado);
+
+            System.out.println("El número es mayor, menor o acierto?");
+            String respuesta = lectura.next().toLowerCase();
+
+            if (respuesta.equals("acierto")) {
+                System.out.println("ha adivinado tu número en " + (6 - oportunidades) + " intentos");
+                break;
+            } else if (respuesta.equals("mayor")) {
+                min = pensado + 1;
+            } else if (respuesta.equals("menor")) {
+                max = pensado - 1;
+            } else {
+                System.out.println("Respuesta no válida. Responde con 'mayor', 'menor' o 'acierto'.");
+                continue;
+            }
+
+            oportunidades--;
+            if (oportunidades == 0) {
+                System.out.println("La máquina se quedó sin intentos.");
+            }
+        }
+
+        lectura.close();
+    }
     public static void main(String[] args) {
 
-        Ejercicio2();
+        Ejercicio14();
     }
 }
 
