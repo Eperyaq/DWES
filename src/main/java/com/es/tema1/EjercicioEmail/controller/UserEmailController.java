@@ -21,7 +21,7 @@ public class UserEmailController {
             UserEmail u = service.getUserEmail(email);
 
             return u != null ?
-                    new RespuestaHTTP("Todo ok", 200) :
+                    new RespuestaHTTP(u,"Todo ok", 200) :
                     new RespuestaHTTP("Bad request", 400);
 
 
