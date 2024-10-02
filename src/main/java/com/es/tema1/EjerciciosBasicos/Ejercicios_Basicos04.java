@@ -33,6 +33,7 @@ public class Ejercicios_Basicos04 {
         System.out.println("Carta seleccionada " + valor  + paloSacado);
     }
     public static void main(String[] args) {
+
         Ejercicio2();
     }
 }
