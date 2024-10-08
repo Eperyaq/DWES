@@ -1,6 +1,4 @@
-package com.es.tema1.ejerLogin;
-
-import com.es.tema1.ejerLogin.clases.Persona;
+package com.es.tema1.ejerLogin.clases;
 
 import java.util.ArrayList;
 import java.util.Scanner;
