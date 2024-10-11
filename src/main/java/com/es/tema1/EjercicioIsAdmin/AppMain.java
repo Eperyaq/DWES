@@ -13,17 +13,10 @@ public class AppMain {
 
         IOutputInterface consola = new Console();
 
-        UserRepository repo = new UserRepository();
-        UserService service = new UserService();
-        UserController controller = new UserController();
-
-
-
         boolean admin = consola.EsAdmin();
         consola.Menu(admin);
 
 
 
-//a@a.com
     }
 }
