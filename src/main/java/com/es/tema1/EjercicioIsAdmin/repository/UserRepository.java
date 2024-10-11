@@ -4,9 +4,14 @@ import com.es.tema1.EjercicioIsAdmin.Utils.EncryptedUtils;
 import com.es.tema1.EjercicioIsAdmin.io.Console;
 import com.es.tema1.EjercicioIsAdmin.io.IOutputInterface;
 import com.es.tema1.EjercicioIsAdmin.model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación del repositorio de usuarios que simula una base de datos en memoria.
+ * Proporciona métodos para insertar, obtener, actualizar y eliminar usuarios.
+ */
 public class UserRepository implements RepositoryInterface<String, User> {
 
     // Lista de usuarios que simula la base de datos.
@@ -14,9 +19,10 @@ public class UserRepository implements RepositoryInterface<String, User> {
     private IOutputInterface consola = new Console();
 
     /**
-     * Función que sirve para introducir un usuario en la base de datos.
-     * @param x
-     * @return El usuario insertado
+     * Inserta un nuevo usuario en el repositorio.
+     *
+     * @param x El usuario que se desea insertar.
+     * @return El usuario insertado.
      */
     @Override
     public User insert(User x) {
@@ -25,8 +31,9 @@ public class UserRepository implements RepositoryInterface<String, User> {
     }
 
     /**
-     * Obtener un usuario por su clave (id).
-     * @param key
+     * Obtiene un usuario del repositorio por su clave (ID).
+     *
+     * @param key La clave del usuario que se desea obtener.
      * @return El usuario encontrado o null si no existe.
      */
     @Override
@@ -40,8 +47,9 @@ public class UserRepository implements RepositoryInterface<String, User> {
     }
 
     /**
-     * Obtener todos los usuarios.
-     * @return Lista de todos los usuarios.
+     * Obtiene todos los usuarios del repositorio.
+     *
+     * @return Una lista de todos los usuarios.
      */
     @Override
     public List<User> getAll() {
@@ -49,24 +57,24 @@ public class UserRepository implements RepositoryInterface<String, User> {
     }
 
     /**
-     * Actualizar un campo de un usuario específico.
-     * @param key Clave del usuario a actualizar.
-     * @param campoACambiar Campo a cambiar segun lo que quiera hacer.
+     * Actualiza un campo de un usuario específico.
+     *
+     * @param key             La clave del usuario a actualizar.
+     * @param campoACambiar   El campo que se desea cambiar (1: admin, 2: correo, 3: contraseña).
+     * @param valorCambiado   El nuevo valor para el campo especificado.
      * @return El usuario actualizado o null si no se encuentra.
      */
     @Override
     public User update(String key, int campoACambiar, String valorCambiado) {
         User user = get(key);
-        //Coge al usuario y hace el cambio que haga falta.
+        // Coge al usuario y hace el cambio que haga falta.
         try {
-
             if (user != null) {
-
                 switch (campoACambiar) {
                     case 1:
-                        if (valorCambiado.isEmpty()){
+                        if (valorCambiado.isEmpty()) {
                             consola.Escribir("No se han cambiado nada");
-                        }else {
+                        } else {
                             String respuesta = consola.PreguntarString("Quieres ser administrador s/n").toLowerCase();
                             if (respuesta.equals("s")) {
                                 user.setAdmin(true);
@@ -76,50 +84,44 @@ public class UserRepository implements RepositoryInterface<String, User> {
                                 consola.Escribir("Ahora no eres admin");
                             }
                         }
-                    break;
+                        break;
 
                     case 2:
                         if (valorCambiado.isEmpty()) {
                             consola.Escribir("Error, no se ha cambiado nada.");
                         } else {
                             String emailComprobado = consola.ValidarEmail(valorCambiado);
-
-                            if (emailComprobado == null){
+                            if (emailComprobado == null) {
                                 consola.Escribir("Error, no se ha cambiado nada");
-                            }else {
+                            } else {
                                 user.setCorreo(emailComprobado);
                             }
                         }
                         break;
 
                     case 3:
-                        if (valorCambiado.isEmpty()){
-                            consola.Escribir("No se ha cambiado nada debido a que se ha introducido un valor vacio.");
-                        }else{
-
+                        if (valorCambiado.isEmpty()) {
+                            consola.Escribir("No se ha cambiado nada debido a que se ha introducido un valor vacío.");
+                        } else {
                             String pass = EncryptedUtils.encriptador(valorCambiado);
-
                             user.setEncriptedPassword(pass);
-
                             consola.Escribir("Contraseña cambiada correctamente");
                         }
-                    break;
-
-
+                        break;
                 }
-
                 return user;
             }
             return null;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; //Si el usuario no existe
+        return null; // Si el usuario no existe
     }
 
     /**
-     * Eliminar un usuario de la base de datos.
-     * @param key Clave del usuario a eliminar.
+     * Elimina un usuario del repositorio.
+     *
+     * @param key La clave del usuario que se desea eliminar.
      */
     @Override
     public void delete(String key) {
