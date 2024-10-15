@@ -8,6 +8,8 @@
         <class>com.es.tema1.ejemploHibernateClase.Pelicula</class>
         <class>com.es.tema1.ejemploHibernateClase.Autor</class>
         <class>com.es.tema1.ejemploHibernateClase.Cine</class>
+        <class>com.es.tema1.ejemploHibernateClase.Direccion</class>
+        <class>com.es.tema1.ejemploHibernateClase.Director</class>
 
         <properties>
             <!-- Que bdd usar -->
